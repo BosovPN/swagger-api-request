@@ -1,6 +1,6 @@
 import axios from 'axios';
 import JSONbig from 'json-bigint';
-import { Pet } from './types';
+import { Pet, Tag } from './types';
 
 const PETS_API_URL = 'https://petstore3.swagger.io/api/v3/pet/findByStatus?status=available';
 
@@ -14,7 +14,7 @@ const fetchPets = async (): Promise<Pet[]> => {
         });
 
         // Convert BigInt numbers to scientific notation
-        const pets = response.data.map((pet: any) => {
+        const pets = response.data.map((pet: Pet) => {
             return {
                 ...pet,
                 // Check for id before conversion
@@ -23,7 +23,7 @@ const fetchPets = async (): Promise<Pet[]> => {
                     ...pet.category,
                     id: pet.category.id ? Number(pet.category.id).toExponential() : null
                 } : null,
-                tags: pet.tags ? pet.tags.map((tag: any) => ({
+                tags: pet.tags ? pet.tags.map((tag: Tag) => ({
                     ...tag,
                     id: tag.id ? Number(tag.id).toExponential() : null
                 })) : []
