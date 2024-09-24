@@ -1,15 +1,15 @@
 export interface Category {
-    id: number;
+    id: string;
     name: string;
 }
 
 export interface Tag {
-    id: number;
+    id: string;
     name: string;
 }
 
 export interface Pet {
-    id: number;
+    id: string;
     category: Category;
     name: string;
     photoUrls: string[];
